@@ -1,4 +1,6 @@
 package com.locotodevteam.todoloco.services
 
-class MyFirebaseMessagingService {
+import com.google.firebase.messaging.FirebaseMessagingService
+
+class MyFirebaseMessagingService: FirebaseMessagingService() {
 }
