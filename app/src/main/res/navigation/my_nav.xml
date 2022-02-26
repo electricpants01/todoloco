@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/postList"
-        android:name="com.locotodevteam.todoloco.ui.PostList"
+        android:name="com.locotodevteam.todoloco.ui.postLisFragment.PostListFragment"
         android:label="fragment_post_list"
         tools:layout="@layout/fragment_post_list" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/infoFragment"
-        android:name="com.locotodevteam.todoloco.ui.InfoFragment"
+        android:name="com.locotodevteam.todoloco.ui.infoFragment.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" />
 </navigation>

@@ -1,6 +1,5 @@
-package com.locotodevteam.todoloco.ui.viewmodel
+package com.locotodevteam.todoloco.ui.mainActivity
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,7 +10,7 @@ import kotlinx.coroutines.launch
 class MainViewModel: ViewModel() {
 
     val posts = MutableLiveData<List<Post.PostItem>>()
-    val repository = PostRepository()
+    private val repository = PostRepository()
 
     fun getAllPosts(){
         viewModelScope.launch {
@@ -22,7 +21,7 @@ class MainViewModel: ViewModel() {
                         posts.postValue(it)
                     }
                 }else{
-                    // return a bad Fetch message
+                    // return a bad Fetch message, maybe receive a closure to do it
                 }
             }
         }

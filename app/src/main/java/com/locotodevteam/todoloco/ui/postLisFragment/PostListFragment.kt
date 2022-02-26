@@ -1,19 +1,19 @@
-package com.locotodevteam.todoloco.ui
+package com.locotodevteam.todoloco.ui.postLisFragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.locotodevteam.todoloco.R
 import com.locotodevteam.todoloco.adapter.PostAdapter
 import com.locotodevteam.todoloco.databinding.FragmentPostListBinding
-import com.locotodevteam.todoloco.ui.viewmodel.MainViewModel
+import com.locotodevteam.todoloco.ui.mainActivity.MainActivity
+import com.locotodevteam.todoloco.ui.mainActivity.MainViewModel
 
-class PostList : Fragment(), PostAdapter.PostListener {
+class PostListFragment : Fragment(), PostAdapter.PostListener {
 
     lateinit var postListBinding: FragmentPostListBinding
     lateinit var recycler: RecyclerView
@@ -31,14 +31,23 @@ class PostList : Fragment(), PostAdapter.PostListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("chris","se esta creanbdo")
+        (activity as MainActivity).setSupportActionBar(postListBinding.toolbar.toolbar)
+//        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         initCalls()
         initRecyclerView()
         initObservers()
+        initListener()
     }
 
     fun initCalls(){
         mainViewModel.getAllPosts()
+    }
+
+    private fun initListener() {
+        postListBinding.toolbar.btnInfo.setOnClickListener {
+            val action = PostListFragmentDirections.actionPostListToInfoFragment()
+            findNavController().navigate(action)
+        }
     }
 
     fun initRecyclerView(){
