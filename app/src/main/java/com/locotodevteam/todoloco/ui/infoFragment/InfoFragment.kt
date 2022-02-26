@@ -3,6 +3,7 @@ package com.locotodevteam.todoloco.ui.infoFragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import com.locotodevteam.todoloco.R
@@ -31,6 +32,6 @@ class InfoFragment : Fragment() {
         (activity as MainActivity).setSupportActionBar(infoBinding.infoToolbar.toolbar)
         infoBinding.infoToolbar.btnInfo.visibility = View.GONE
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
     }
+
 }

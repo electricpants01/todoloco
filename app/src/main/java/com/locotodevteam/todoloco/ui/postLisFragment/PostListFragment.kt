@@ -15,9 +15,9 @@ import com.locotodevteam.todoloco.ui.mainActivity.MainViewModel
 
 class PostListFragment : Fragment(), PostAdapter.PostListener {
 
-    lateinit var postListBinding: FragmentPostListBinding
-    lateinit var recycler: RecyclerView
-    val mainViewModel: MainViewModel by activityViewModels()
+    private lateinit var postListBinding: FragmentPostListBinding
+    private lateinit var recycler: RecyclerView
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +38,7 @@ class PostListFragment : Fragment(), PostAdapter.PostListener {
         initListener()
     }
 
-    fun initCalls(){
+    private fun initCalls(){
         mainViewModel.getAllPosts()
     }
 
@@ -49,26 +49,16 @@ class PostListFragment : Fragment(), PostAdapter.PostListener {
         }
     }
 
-    fun initRecyclerView(){
+    private fun initRecyclerView(){
         recycler = postListBinding.rvPosts
         recycler.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
         recycler.adapter = PostAdapter(emptyList(),this)
     }
 
-    fun initObservers(){
+    private fun initObservers(){
         mainViewModel.posts.observe(viewLifecycleOwner) {
             recycler.adapter = PostAdapter(it, this)
         }
-    }
-
-    override fun onPause() {
-        println("chris, entro al onpause")
-        super.onPause()
-    }
-
-    override fun onDestroy() {
-        println("chris, se elimina el postList")
-        super.onDestroy()
     }
 
     override fun didSelectPost(postId: String) {
