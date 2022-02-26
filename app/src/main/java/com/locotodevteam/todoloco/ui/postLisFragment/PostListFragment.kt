@@ -31,8 +31,7 @@ class PostListFragment : Fragment(), PostAdapter.PostListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as MainActivity).setSupportActionBar(postListBinding.toolbar.toolbar)
-//        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).setSupportActionBar(postListBinding.myToolbar.toolbar)
         initCalls()
         initRecyclerView()
         initObservers()
@@ -44,7 +43,7 @@ class PostListFragment : Fragment(), PostAdapter.PostListener {
     }
 
     private fun initListener() {
-        postListBinding.toolbar.btnInfo.setOnClickListener {
+        postListBinding.myToolbar.btnInfo.setOnClickListener {
             val action = PostListFragmentDirections.actionPostListToInfoFragment()
             findNavController().navigate(action)
         }
@@ -57,12 +56,20 @@ class PostListFragment : Fragment(), PostAdapter.PostListener {
     }
 
     fun initObservers(){
-        mainViewModel.posts.observe(viewLifecycleOwner,{
-            recycler.adapter = PostAdapter(it,this)
-        })
+        mainViewModel.posts.observe(viewLifecycleOwner) {
+            recycler.adapter = PostAdapter(it, this)
+        }
     }
 
+    override fun onPause() {
+        println("chris, entro al onpause")
+        super.onPause()
+    }
 
+    override fun onDestroy() {
+        println("chris, se elimina el postList")
+        super.onDestroy()
+    }
 
     override fun didSelectPost(postId: String) {
         //TODO: mover a la vista del detalle
